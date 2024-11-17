@@ -1,0 +1,72 @@
+pip install yfinance
+!pip install matplotlib
+
+## Question 1: Use yfinance to Extract Stock Data Reset the index, save, and display the first five rows of the tesla_data dataframe using the head function. Upload a screenshot of the results and code from the beginning of Question 1 to the results below.
+import yfinance as yf
+
+# Descarga de datos
+tesla_data = yf.download('TSLA', start='2020-01-01', end='2024-11-17')
+# Restablecer el índice del marco de datos
+tesla_data.reset_index(inplace=True)
+# Visualizar las primeras cinco filas del marco de datos
+print(tesla_data.head())
+
+## Question 2: Use Webscraping to Extract Tesla Revenue Data Display the last five rows of the tesla_revenue dataframe using the tail function. Upload a screenshot of the results.
+
+tesla = yf.Ticker('TSLA') # Descarga datos Tesla
+tesla_revenue = tesla.financials.T  # Obtener el reporte 
+print(tesla_revenue.tail()) # Mostrar las cinco últimas filas
+
+## Question 3: Use yfinance to Extract Stock Data Reset the index, save, and display the first five rows of the gme_data dataframe using the head function. Upload a screenshot of the results and code from the beginning of Question 1 to the results below.
+
+import yfinance as yf
+gme_data = yf.download('GME', start='2020-01-01', end='2024-11-17')
+gme_data.reset_index(inplace=True)
+print(gme_data.head()) # Muestra las ultimas 5 filas 
+
+## Question 4: Use Webscraping to Extract GME Revenue Data Display the last five rows of the gme_revenue dataframe using the tail function. Upload a screenshot of the results.
+
+#  acción de GameStop (GME)
+gme = yf.Ticker('GME')
+gme_revenue = gme.financials.T  # Obtener datos - devuelve el reporte 
+print(gme_revenue.tail()) # Mostrar las últimas 5 filas de los ingresos
+
+
+
+## Question 5: Plot Tesla Stock Graph Use the make_graph function to graph the Tesla Stock Data, also provide a title for the graph. Upload a screenshot of your results.
+
+import yfinance as yf
+import matplotlib.pyplot as plt
+
+# Función para graficar los datos de las acciones
+def make_graph(stock_data):
+    # Graficar
+    plt.figure(figsize=(10, 6))
+    plt.plot(stock_data['Close'], label='Tesla Stock Price')
+    plt.title('Tesla Stock Price Over Time')  # Título
+    plt.xlabel('Date')
+    plt.ylabel('Stock Price (USD)')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+# Descargar los datos
+tesla_data = yf.download('TSLA', start='2020-01-01', end='2024-11-17')
+make_graph(tesla_data)
+
+
+
+## Question 6: Plot GameStop Stock GraphUse the make_graph function to graph the GameStop Stock Data, also provide a title for the graph. Upload a screenshot of your results.
+def make_graph(stock_data):
+    # Graficar
+    plt.figure(figsize=(10, 6))
+    plt.plot(stock_data['Close'], label='GameStop Stock Price')
+    plt.title('GameStop Stock Price Over Time')  # Título 
+    plt.xlabel('Date')
+    plt.ylabel('Stock Price (USD)')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+# Descargar los datos de GameStop
+gme_data = yf.download('GME', start='2020-01-01', end='2024-11-17')
+make_graph(gme_data)
